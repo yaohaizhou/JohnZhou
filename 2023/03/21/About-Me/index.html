@@ -1,188 +1,364 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>About Me | Yaohai's Blog</title><meta name="author" content="Yaohai Zhou"><meta name="copyright" content="Yaohai Zhou"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
-<meta property="og:title" content="About Me">
-<meta property="og:url" content="http://yaohaizhou.com/2023/03/21/About-Me/index.html">
-<meta property="og:site_name" content="Yaohai&#39;s Blog">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yaohaizhou.com/2023/03/21/About-Me/aboutme.jpeg">
-<meta property="article:published_time" content="2023-03-22T06:14:58.000Z">
-<meta property="article:modified_time" content="2023-03-22T06:18:24.753Z">
-<meta property="article:author" content="Yaohai Zhou">
-<meta property="article:tag" content="CV">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yaohaizhou.com/2023/03/21/About-Me/aboutme.jpeg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yaohaizhou.com/2023/03/21/About-Me/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
-  copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  date_suffix: {
-    just: 'Just',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isAnchor: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'About Me',
-  isPost: true,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2023-03-21 23:18:24'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
 
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0, minimum-scale=0.2">
 
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
 
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-09RRKD7CRD"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
+    gtag('config', 'G-09RRKD7CRD');
+    </script>
+    <script>var clicky_site_ids = clicky_site_ids || []; clicky_site_ids.push(101296995);</script>
+    <script async src="//static.getclicky.com/js"></script>    
+    -->
+
+    <script>
+        // 判断是否为移动端运行环境 
+
+        // if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){ 
+
+        // if(window.location.href.indexOf("?mobile")<0){ 
+        try{ 
+            // if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){ 
+            if (window.screen.width < 700) {
+            // 判断访问环境是 Android|webOS|iPhone|iPod|BlackBerry 则加载以下样式 
+                setActiveStyleSheet("jemdoc_mobile.css"); 
+            } 
+            else if(/iPad/i.test(navigator.userAgent)){ 
+            // 判断访问环境是 iPad 则加载以下样式 
+                setActiveStyleSheet("jemdoc.css"); 
+            } 
+            else{ 
+            // 判断访问环境是 其他移动设备 则加载以下样式 
+                setActiveStyleSheet("jemdoc.css"); 
+            } 
+        } 
+        catch(e){} 
+        // } 
+        // } 
+
+        // else{ 
+
+        // 如果以上都不是，则加载以下样式 
+
+        // setActiveStyleSheet("jemdoc.css"); 
+
+        // } 
+
+        // 判断完毕后加载样式 
+
+        function setActiveStyleSheet(filename){
+            document.write("<link href="+filename+" rel=stylesheet>");
         }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+    </script>
+
+    <link rel="shortcut icon" href="myIcon.ico">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="keywords" content="Yaohai Zhou, UCLA, HUST, 周耀海">
+    <meta name="description" content="Yaohai Zhou's home page">
+    <!-- <link rel="stylesheet" href="jemdoc.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-width:700px)" href="jemdoc_mobile.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-width:700px)" href="jemdoc.css" type="text/css" /> -->
+    <title>Yaohai Zhou</title>
+</head>
+
+<body>
+    <div id="layout-content" style="margin-top:0px">
+        <table>
+            <tbody>
+                <tr>
+                    <td width="80%">
+                        <div id="toptitle">
+                        <h1>Yaohai Zhou (周耀海)</h1>
+				        </div>
+                        <h3>Master student</h3>
+                        <p>
+                            Email: <a href="mailto:zyh828482@gmail.com">zyh828482 [at] gmail.com</a>
+                        </p>
+                        <p>
+                            <a href="https://github.com/zyhhhy"><img src="assets/github.png" height="30px"></a>
+                        </p>
+                        <b>Stay hungry, stay foolish.</b>
+                    </td>
+			        <td width="20%"><img src="assets/yaohaizhou.jpg" border="0" width="100%"></br></td>
+		<tr>
+	</tbody>
+</table>
+
+<h2>Biography</h2>
+<!-- <h2>Biography</h2> -->
+<p>
+    <div style="text-align:justify"> 
+        I am a M.S. candidate with over 4 years of programming experience in various areas, including backend development, cloud & distributed systems, database and machine learning; solid programming skills in C++, Python, Go, Java and SQL; hands-on experience with React, PyTorch and GCP; strong knowledge of algorithms, data structures.
+    </div>
+</p>
+<!-- <p>My research interests lie within Natural Language Processing, particularly in Dialogue System and Vision-Language tasks. I am also involved in Cognitive Science and its application in Dialogue System.</p> -->
+<!-- <p><font color="red">Pinned: </font></p> -->
+<!-- <h2>News</h2>
+<ul>
+    <li>
+        [2021/07] Talk at the NSF Future Directions Workshop on the Automatic Evaluation of Open-Domain Dialog (AED).
+    </li>
+    <li>
+        [2021/06] Talk at Baidu NLP on pre-training and evaluation for open-domain dialogue.
+    </li>
+    <li>
+        [2021/05] Two papers about dialogue pre-training and dialogue consistency evaluation were accepted to ACL2021.
+    </li>
+    <li>
+        [2021/04] We will organize <a href="https://sites.google.com/dstc.community/dstc10/tracks">Track1: MOD:Internet Meme Incorporated Open-domain Dialog</a> at DSTC10. Welcome to join the challenge!
+    </li>
+    <li>
+        [2021/02] One paper about Audio-Visual Scene-aware Dialogue was accepted to IEEE/ACM TASLP.
+    </li>
+    <li>
+        [2021/02] Our project (Science Fiction AI-Human Co-writing) won the First Prize in the 6th National Youth Artificial Intelligence Innovation, CAAI, advised by Yonggang Wang and Ming Zhou.
+    </li>
+    <li>
+        [2020/11] One paper about Interactive Dialogue System was accepted to DSTC9@AAAI2021.
+    </li>
+    <li>
+        [2020/10] We participated in the DSTC9 Interactive Dialogue Evaluation Track. We tied the 1st in sub-task1 and got the 3rd place in sub-task2.
+    </li>
+    <li>
+        [2020/08] Our project (Science Fiction AI-Human Co-writing) won the 1st place in the Innovation Track at Deecamp 2020.
+    </li>
+    <li>
+        [2019/11] One paper about Audio-Visual Scene-aware Dialogue was accepted to DSTC8@AAAI2020.
+    </li>
+    <li>
+        [2019/10] We won the 1st place in the DSTC8 AVSD Track.
+    </li>
+    <li>
+        [2019/05] One paper about Document Grounded Conversations was accepted to ACL2019.
+    </li><li>
+        [2018/11] I join WeChat AI as Research Intern.
+    </li>
+</ul> -->
+
+<h2>Education</h2>
+<ul>
+    <li>
+        <div style="display: flex; justify-content: space-between;">
+            <div><a href="https://www.ucla.edu/">University of California Los Angeles (UCLA)</a>, Los Angeles, USA</div>
+            <div style="margin-left: 2px;">Sep. 2022 – Dec. 2023 (expected)</div>
+        </div>
+        Master of Engineering, Artificial Intelligence/Computer Science<br>
+    </li>
+    <li>
+        <div style="display: flex; justify-content: space-between;">
+            <div><a href="https://www.hust.edu.cn">Huazhong University of Science and Technology</a>, Wuhan, China</div>
+            <div style="margin-left: 2px;">Sep. 2018 – Jun. 2022</div>
+        </div>
+        Bachelor of Engineering, Electrical and Computer Engineering<br>
+    </li>
+
+</ul>
+
+<h2>Experience</h2>
+<ul>
+	<li>
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>Intel</div>
+            <div style="margin-left: 2px;">Beijing, China</div>
+        </div>
+        <!-- Intel, Beijing, China<br> -->
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>Software Engineer Intern · Network Platform Group: AI Channel Link Adaptation</div>
+            <div style="margin-left: 2px;">Jul. 2021 – Jan. 2022</div>
+        </div>
+        <ul>
+            <li>
+                Developed a pipeline utilizing reinforcement learning to increase the transmission throughput in 5G scenarios.
+                <ul>
+                    <li>
+                        Built the offline data pipeline and the training & testing environment using <b>PyTorch</b>.
+                    </li>
+                    <li>
+                        Used Matlab to simulate ideal wireless transmission scenarios and visualized data relationship using <b>Python</b>.
+                    </li>
+                    <li>
+                        Combined Dueling Double DQN and Time Series Neural Networks to handle multi-frame data.
+                    </li>
+                    <li>
+                        Created an efficient input combination to help the model adapt to the channel changes very quickly.
+                    </li>
+                    <li>
+                        Starting from the principle of link adaptation, used a mathematical trick to accelerate the convergence speed.
+                    </li>
+                </ul>
+
+            </li>
+            <li>
+                Converted model to ONNX and deployed the model on Intel’s FlexRAN platform using OneDNN in <b>C/C++</b>.
+            </li>
+            <li>
+                Achieved 10% higher throughput and faster adjustment speed than traditional algorithm.
+            </li>
+        </ul>
+	</li>
+	<li>
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>Shenzhen Innox Academy</div>
+            <div style="margin-left: 2px;">Shenzhen, Guangdong province, China</div>
+        </div>
+        <!-- Shenzhen Innox Academy, Shenzhen, Guangdong province, China<br> -->
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>Software Engineer Intern · Auto-Driving Group: 3D Vision Mapping Generation</div>
+            <div style="margin-left: 2px;">Feb. 2022 – Apr. 2022</div>
+        </div>
+        <ul>
+            <li>
+                Used 2D camera pictures to generate vision maps using Multiple Vision Geometry and Computer Vision techniques.
+            </li>
+            <li>
+                Collect raw images through fisheye cameras, preprocess and extract semantic segmentation result in <b>Python</b> and MM-Detection.
+            </li>
+            <li>
+                Proposed a method to filter straight lines (poles and lights) in maps and corresponding positioning algorithm in <b>tensorRT C++</b>.
+            </li>
+            <li>
+                Deployed the model on a sweeper car and joint debugged with navigation and object detection algorithms.
+            </li>
+        </ul>
+	</li>
+
+</ul>
+
+<h2>Projects (Selected)</h2>
+<ul>
+	<li>
+        <b>PAPERREADER: A REACT-BASED PAPER SUMMARY APPLICATION</b><br>
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>(React, Python, Django, JavaScript, HTML/CSS, ElasticSearch, ChatGPT, GCP)</div>
+            <div style="margin-left: 2px;">Jan. 2023 – Present</div>
+        </div>
+        <ul>
+            <li>
+                Developed a scalable web application auto-summarizing papers based on ChatGPT in <b></b>Python and Django.
+            </li>
+            <li>
+                Implemented front-end features such as uploading, searching, and browsing summary result, using <b></b>React.js.
+            </li>
+            <li>
+                Developed fancy features eg. when user clicks on a sentence, more detailed text will be produced and showed.
+            </li>
+            <li>
+                Built search functions supporting searching recent similar papers by keywords and areas, using <b></b>ElasticSearch.
+            </li>
+        </ul>
+	</li>
+	<li>
+        <b>
+            RAFT-KV DATABASE: A FAULT-TOLERANT KEY/VALUE STORAGE SYSTEM</b><br>
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>(Go, RPC, Key/Value Storage System, Multi-threaded programming)</div>
+            <div style="margin-left: 2px;">Sep. 2022 – Dec. 2022</div>
+        </div>
+        <ul>
+            <li>
+                Supported transactions and commands to Create, Read, Update, and Delete (CRUD) key-value pairs in <b>Go</b>.
+            </li>
+            <li>
+                Adopted Raft consensus protocol for leader election & log replication to ensure consistency and partition tolerance.
+            </li>
+            <li>
+                Introduced atomicity, consistency, isolation, and durability (<b>ACID</b>) by applying Two-Phase Commit.
+            </li>
+            <li>
+                Ran a coordinator daemon to solve deadlock by detecting and breaking the cycle in the directed graph.
+            </li>
+        </ul>
+	</li>
+    <li>
+        <b>VECTORIZED SIMILARITY SEARCH IN MULTIMODAL DATABASES <a href="http://34.168.201.92:8501/">Demo</a></b><br>
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>(Python, Streamlit, PyTorch, KNN, Faiss ANN, GCP)</div>
+            <div style="margin-left: 2px;">Sep. 2022 – Dec. 2022</div>
+        </div>
+        <ul>
+            <li>
+                Co-designed a multimodal database including texts and images in Python and deployed on <b>GCP</b>.
+            </li>
+            <li>
+                Introduced CLIP to embed texts and images into high-dimensional vector spaces and fine-tune pre-trained model.
+            </li>
+            <li>
+                Implemented kNN and Faiss Approximate Nearest Neighbor (ANN) to conduct multimodal similarity searches.
+            </li>
+        </ul>
+	</li>
+    <li>
+        <b>TRUCK DETECTION ALGORITHM FOR INTELLIGENCE TRANSPORTATION SYSTEM</b><br>
+        <div style="display: flex; justify-content: space-between; font-style: italic;">
+            <div>(Python, PyTorch, Ubuntu, C++, Shell)</div>
+            <div style="margin-left: 2px;">Mar. 2021 – Jun. 2021</div>
+        </div>
+        <ul>
+            <li>
+                Developed a system to detect trucks (100K pictures per day) in traffic cameras using computer vision techniques.
+            </li>
+            <li>
+                Optimized network of YOLOv5 using <b>PyTorch</b> by model distillation, model fusion, adding attention mechanism.
+            </li>
+            <li>
+                Used <b>TensorRT-C++</b> to deploy the model in a Traffic Department and maintained the system running until now.
+            </li>
+            <li>
+                Achieved 96% accuracy and 93% recall on real truck detection scenario. Earned $30,000 on this project.
+            </li>
+        </ul>
+	</li>
+</ul>
+
+<h2>Honors & Awards</h2>
+<ul>
+	<!-- <li>
+		<div style="float:left; text-align:left">Outstanding Graduate award, Huazhong University of Science and Technology</div> <div style="float:right; text-align:right">Jun. 2020</div>
         
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2023/03/21/About-Me/aboutme.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yaohai's Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">About Me</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-03-22T06:14:58.000Z" title="Created 2023-03-21 23:14:58">2023-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-03-22T06:18:24.753Z" title="Updated 2023-03-21 23:18:24">2023-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="About Me"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container">
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://yaohaizhou.com">Yaohai Zhou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yaohaizhou.com/2023/03/21/About-Me/">http://yaohaizhou.com/2023/03/21/About-Me/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CV/">CV</a></div><div class="post_share"><div class="social-share" data-image="/2023/03/21/About-Me/aboutme.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/01/17/Distributed-Systems-MIT6-824-Notes/"><img class="next-cover" src="/2023/01/17/Distributed-Systems-MIT6-824-Notes/gfs.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Distributed Systems MIT6.824 Notes</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yaohai Zhou</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zyhhhy"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zyhhhy" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zyh828482@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Yaohai is a M.S. candidate with over 4 years of programming experience in various areas, including backend development, cloud & distributed systems, database and machine learning; solid programming skills in C++, Python, Go, Java and SQL; hands-on experience with React, PyTorch and GCP; strong knowledge of algorithms, data structures.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/21/About-Me/" title="About Me"><img src="/2023/03/21/About-Me/aboutme.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="About Me"/></a><div class="content"><a class="title" href="/2023/03/21/About-Me/" title="About Me">About Me</a><time datetime="2023-03-22T06:14:58.000Z" title="Created 2023-03-21 23:14:58">2023-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/17/Distributed-Systems-MIT6-824-Notes/" title="Distributed Systems MIT6.824 Notes"><img src="/2023/01/17/Distributed-Systems-MIT6-824-Notes/gfs.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Distributed Systems MIT6.824 Notes"/></a><div class="content"><a class="title" href="/2023/01/17/Distributed-Systems-MIT6-824-Notes/" title="Distributed Systems MIT6.824 Notes">Distributed Systems MIT6.824 Notes</a><time datetime="2023-01-17T23:22:11.000Z" title="Created 2023-01-17 15:22:11">2023-01-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/05/Cpp-Concurrency-in-Action-Note/" title="Cpp Concurrency in Action Note"><img src="/2023/01/05/Cpp-Concurrency-in-Action-Note/CCIA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Cpp Concurrency in Action Note"/></a><div class="content"><a class="title" href="/2023/01/05/Cpp-Concurrency-in-Action-Note/" title="Cpp Concurrency in Action Note">Cpp Concurrency in Action Note</a><time datetime="2023-01-06T00:43:08.000Z" title="Created 2023-01-05 16:43:08">2023-01-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/17/Vectorized-Similarity-Search-in-Multi-modal-Databases/" title="Vectorized Similarity Search in Multi-modal Databases"><img src="/2022/12/17/Vectorized-Similarity-Search-in-Multi-modal-Databases/db.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vectorized Similarity Search in Multi-modal Databases"/></a><div class="content"><a class="title" href="/2022/12/17/Vectorized-Similarity-Search-in-Multi-modal-Databases/" title="Vectorized Similarity Search in Multi-modal Databases">Vectorized Similarity Search in Multi-modal Databases</a><time datetime="2022-12-17T18:30:37.000Z" title="Created 2022-12-17 10:30:37">2022-12-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Yaohai Zhou</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
-  window.MathJax = {
-    tex: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]],
-      tags: 'ams'
-    },
-    chtml: {
-      scale: 1.1
-    },
-    options: {
-      renderActions: {
-        findScript: [10, doc => {
-          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
-            const display = !!node.type.match(/; *mode=display/)
-            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
-            const text = document.createTextNode('')
-            node.parentNode.replaceChild(text, node)
-            math.start = {node: text, delim: '', n: 0}
-            math.end = {node: text, delim: '', n: 0}
-            doc.math.push(math)
-          }
-        }, ''],
-        insertScript: [200, () => {
-          document.querySelectorAll('mjx-container').forEach(node => {
-            if (node.hasAttribute('display')) {
-              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
-            } else {
-              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
-            }
-          });
-        }, '', false]
-      }
-    }
-  }
-  
-  const script = document.createElement('script')
-  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
-  script.id = 'MathJax-script'
-  script.async = true
-  document.head.appendChild(script)
-} else {
-  MathJax.startup.document.state(0)
-  MathJax.texReset()
-  MathJax.typeset()
-}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+    </li> -->
+    <li>
+        <div style="display: flex; justify-content: space-between;">
+            <div>National Scholarship for China (0.2%)</div>
+            <div style="margin-left: 2px;">Oct. 2021</div>
+        </div>
+    </li>
+    <li>
+        <div style="display: flex; justify-content: space-between;">
+            <div>Finalist in Mathematical Contest in Modeling (2%)</div>
+            <div style="margin-left: 2px;">Apr. 2021</div>
+        </div>
+    </li>
+</ul>
+
+<!-- <h2>Publications [<a href="https://scholar.google.com/citations?user=jkcRdBgAAAAJ&hl=en">Google Scholar</a>]</h2> -->
+<h2>Publications (Selected)</h2>
+<ul>
+    <li>
+        <a href="https://ieeexplore.ieee.org/document/9666981">Efficient Human Pose Estimation by Maximizing Fusion and High-Level Spatial Attention</a><br>
+        Zhiyuan Ren; <b>Yaohai Zhou</b>; Yizhe Chen; Ruisong Zhou; Yayu Gao.<br>
+        <em>IEEE International Conference on Automatic Face and Gesture Recognition, 2021 · Jan 12, 2022<br>
+    </li>
+    <li>
+        <a href="https://ieeexplore.ieee.org/document/9625323">Channel Prediction with Liquid Time-Constant Networks: An Online and Adaptive Approach</a><br>
+        Hao Yin; <b>Yaohai Zhou</b>; Liu Cao; Yifei Xu<br>
+        <em>IEEE 94th Vehicular Technology Conference, 2021 · Dec 10, 2021<br>
+    </li>
+</ul>
+
+<div id="footer">
+	<div id="footer-text" style="text-align: center;">© Yaohai Zhou | Last updated: 02/06/2023</div>
+</div>
+
+</div>
+
+</body>
+</html>
+
