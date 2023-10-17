@@ -6,7 +6,7 @@
 <meta property="og:description" content="Golang中GC Go V1.3之前的标记清除（mark and sweep） STW(stop the world)，在GC的时候会停止整个程序，会占用时间，因此提升效率的思路是减少STW的比例   image-20231017104522632  5和6需要被回收掉， STW，给12347这五个对象进行标记，5和6被回收 流程  暂停程序业务逻辑，找出不可达达对象，和可达对象 开始标记，程序">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-30T06:14:17.000Z">
-<meta property="article:modified_time" content="2023-10-17T17:48:57.124Z">
+<meta property="article:modified_time" content="2023-10-17T17:53:52.427Z">
 <meta property="article:author" content="Yaohai Zhou">
 <meta property="article:tag" content="Notes">
 <meta name="twitter:card" content="summary"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yaohaizhou.com/2023/09/29/Garbage-Collection-in-Golang/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
@@ -51,7 +51,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2023-10-17 10:48:57'
+  postUpdate: '2023-10-17 10:53:52'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -140,15 +140,13 @@
       }
     }
     detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yaohai's Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Garbage Collection in Golang</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-09-30T06:14:17.000Z" title="Created 2023-09-29 23:14:17">2023-09-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-10-17T17:48:57.124Z" title="Updated 2023-10-17 10:48:57">2023-10-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Garbage Collection in Golang"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="golang中gc">Golang中GC</h1>
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Yaohai's Blog</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Garbage Collection in Golang</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-09-30T06:14:17.000Z" title="Created 2023-09-29 23:14:17">2023-09-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-10-17T17:53:52.427Z" title="Updated 2023-10-17 10:53:52">2023-10-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Garbage Collection in Golang"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="golang中gc">Golang中GC</h1>
 <h1 id="go-v1.3之前的标记清除mark-and-sweep">Go V1.3之前的标记清除（mark
 and sweep）</h1>
 <p>STW(stop the
 world)，在GC的时候会停止整个程序，会占用时间，因此提升效率的思路是减少STW的比例</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104522632.png"
-alt="image-20231017104522632" />
+<img src="image-20231017104522632.png" alt="image-20231017104522632" />
 <figcaption aria-hidden="true">image-20231017104522632</figcaption>
 </figure>
 <p>5和6需要被回收掉，</p>
@@ -167,9 +165,7 @@ alt="image-20231017104522632" />
 <li>清除数据会产生heap碎片，对碎片的重组比较繁琐</li>
 </ol>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104533785.png"
-alt="image-20231017104533785" />
+<img src="image-20231017104533785.png" alt="image-20231017104533785" />
 <figcaption aria-hidden="true">image-20231017104533785</figcaption>
 </figure>
 <p>可以让STW和清除换一个位置，可以减少STW占用的时间</p>
@@ -183,16 +179,12 @@ alt="image-20231017104533785" />
 <li>灰色标记表</li>
 </ol>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104543358.png"
-alt="image-20231017104543358" />
+<img src="image-20231017104543358.png" alt="image-20231017104543358" />
 <figcaption aria-hidden="true">image-20231017104543358</figcaption>
 </figure>
 <p>把第一层的对象变成灰色</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104552129.png"
-alt="image-20231017104552129" />
+<img src="image-20231017104552129.png" alt="image-20231017104552129" />
 <figcaption aria-hidden="true">image-20231017104552129</figcaption>
 </figure>
 <ol type="1">
@@ -201,47 +193,33 @@ alt="image-20231017104552129" />
 <p>遍历灰色标记表，将可达达对象，从白色标记为灰色</p>
 <p>遍历之后的灰色，标记为黑色</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104601557.png"
-alt="image-20231017104601557" />
+<img src="image-20231017104601557.png" alt="image-20231017104601557" />
 <figcaption aria-hidden="true">image-20231017104601557</figcaption>
 </figure>
 <p>重复上一步，直到灰色标记表中无任何对象</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104609381.png"
-alt="image-20231017104609381" />
+<img src="image-20231017104609381.png" alt="image-20231017104609381" />
 <figcaption aria-hidden="true">image-20231017104609381</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104616702.png"
-alt="image-20231017104616702" />
+<img src="image-20231017104616702.png" alt="image-20231017104616702" />
 <figcaption aria-hidden="true">image-20231017104616702</figcaption>
 </figure>
 <h2 id="无stw">无STW</h2>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104624350.png"
-alt="image-20231017104624350" />
+<img src="image-20231017104624350.png" alt="image-20231017104624350" />
 <figcaption aria-hidden="true">image-20231017104624350</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104635092.png"
-alt="image-20231017104635092" />
+<img src="image-20231017104635092.png" alt="image-20231017104635092" />
 <figcaption aria-hidden="true">image-20231017104635092</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104645493.png"
-alt="image-20231017104645493" />
+<img src="image-20231017104645493.png" alt="image-20231017104645493" />
 <figcaption aria-hidden="true">image-20231017104645493</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104652891.png"
-alt="image-20231017104652891" />
+<img src="image-20231017104652891.png" alt="image-20231017104652891" />
 <figcaption aria-hidden="true">image-20231017104652891</figcaption>
 </figure>
 <p>三色标记最不希望发生的事情</p>
@@ -253,16 +231,12 @@ alt="image-20231017104652891" />
 <h2 id="强三色不变式">强三色不变式</h2>
 <p>强制性的不允许黑色对象引用白色对象</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104659759.png"
-alt="image-20231017104659759" />
+<img src="image-20231017104659759.png" alt="image-20231017104659759" />
 <figcaption aria-hidden="true">image-20231017104659759</figcaption>
 </figure>
 <h2 id="弱三色不变式">弱三色不变式</h2>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104711389.png"
-alt="image-20231017104711389" />
+<img src="image-20231017104711389.png" alt="image-20231017104711389" />
 <figcaption aria-hidden="true">image-20231017104711389</figcaption>
 </figure>
 <p>黑色对象可以引用白色对象的前提是白色对象上游有灰色对象</p>
@@ -278,15 +252,11 @@ alt="image-20231017104711389" />
 <p>满足：强三色不变式，不存在黑色引用白色对象的情况</p>
 <p>插入屏障不在栈上使用</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104719652.png"
-alt="image-20231017104719652" />
+<img src="image-20231017104719652.png" alt="image-20231017104719652" />
 <figcaption aria-hidden="true">image-20231017104719652</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104726558.png"
-alt="image-20231017104726558" />
+<img src="image-20231017104726558.png" alt="image-20231017104726558" />
 <figcaption aria-hidden="true">image-20231017104726558</figcaption>
 </figure>
 <p>插入屏障标记为灰色会占据一些时间，因此运行效率低，不适合应用在栈上面</p>
@@ -296,9 +266,7 @@ alt="image-20231017104726558" />
 <p>被删除的对象，如果其下游对象是灰色或者白色，那么下游的对象改为灰色</p>
 <p>（保护灰色对象到白色对象的路径不会断）</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104733807.png"
-alt="image-20231017104733807" />
+<img src="image-20231017104733807.png" alt="image-20231017104733807" />
 <figcaption aria-hidden="true">image-20231017104733807</figcaption>
 </figure>
 <p>删除写屏障不足：删除精度比较低，有的垃圾会活到下一轮</p>
@@ -312,78 +280,56 @@ alt="image-20231017104733807" />
 </ol>
 <p>GC开始时优先扫描栈，将栈上可达对象全部标记为黑</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104741510.png"
-alt="image-20231017104741510" />
+<img src="image-20231017104741510.png" alt="image-20231017104741510" />
 <figcaption aria-hidden="true">image-20231017104741510</figcaption>
 </figure>
 <h2 id="场景1">场景1</h2>
 <p>对象被一个堆对象删除引用，成为栈对象的下游</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104751613.png"
-alt="image-20231017104751613" />
+<img src="image-20231017104751613.png" alt="image-20231017104751613" />
 <figcaption aria-hidden="true">image-20231017104751613</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104758172.png"
-alt="image-20231017104758172" />
+<img src="image-20231017104758172.png" alt="image-20231017104758172" />
 <figcaption aria-hidden="true">image-20231017104758172</figcaption>
 </figure>
 <p>对象4删除对对象7的引用的时候，把7变成灰色</p>
 <h2 id="场景2">场景2</h2>
 <p>对象被一个栈对象删除，成为另一个栈对象下游</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104807970.png"
-alt="image-20231017104807970" />
+<img src="image-20231017104807970.png" alt="image-20231017104807970" />
 <figcaption aria-hidden="true">image-20231017104807970</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104814427.png"
-alt="image-20231017104814427" />
+<img src="image-20231017104814427.png" alt="image-20231017104814427" />
 <figcaption aria-hidden="true">image-20231017104814427</figcaption>
 </figure>
 <h2 id="场景3">场景3</h2>
 <p>对象被一个堆对象删除引用，成为另一个堆对象的下游</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104821967.png"
-alt="image-20231017104821967" />
+<img src="image-20231017104821967.png" alt="image-20231017104821967" />
 <figcaption aria-hidden="true">image-20231017104821967</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104828352.png"
-alt="image-20231017104828352" />
+<img src="image-20231017104828352.png" alt="image-20231017104828352" />
 <figcaption aria-hidden="true">image-20231017104828352</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104834685.png"
-alt="image-20231017104834685" />
+<img src="image-20231017104834685.png" alt="image-20231017104834685" />
 <figcaption aria-hidden="true">image-20231017104834685</figcaption>
 </figure>
 <h2 id="场景4">场景4</h2>
 <p>对象从一个栈对象删除引用，成为另一个堆对象的下游</p>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104841278.png"
-alt="image-20231017104841278" />
+<img src="image-20231017104841278.png" alt="image-20231017104841278" />
 <figcaption aria-hidden="true">image-20231017104841278</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104847077.png"
-alt="image-20231017104847077" />
+<img src="image-20231017104847077.png" alt="image-20231017104847077" />
 <figcaption aria-hidden="true">image-20231017104847077</figcaption>
 </figure>
 <figure>
-<img
-src="/Users/zyh/Documents/hexo/source/_posts/Garbage-Collection-in-Golang/image-20231017104853079.png"
-alt="image-20231017104853079" />
+<img src="image-20231017104853079.png" alt="image-20231017104853079" />
 <figcaption aria-hidden="true">image-20231017104853079</figcaption>
 </figure>
 </article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://yaohaizhou.com">Yaohai Zhou</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yaohaizhou.com/2023/09/29/Garbage-Collection-in-Golang/">http://yaohaizhou.com/2023/09/29/Garbage-Collection-in-Golang/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Notes/">Notes</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/08/13/Looking-Back-On-The-Past-Three-Years/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Looking Back On The Past Three Years</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yaohai Zhou</div><div class="author-info__description">Yaohai is a M.S. candidate with over 4 years of programming experience in various areas, including backend development, cloud & distributed systems, database and machine learning; solid programming skills in Go, Python, C++, and SQL; hands-on experience with Gin, PyTorch and GCP; strong knowledge of algorithms, data structures.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zyhhhy"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zyhhhy" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zyh828482@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Yaohai is a M.S. candidate with over 4 years of programming experience in various areas, including backend development, cloud computing, and machine learning; solid programming skills in Python, C++, Go, Java and SQL; hands-on experience with Gin, PyTorch and GCP; strong knowledge of algorithms, data structures.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#golang%E4%B8%ADgc"><span class="toc-number">1.</span> <span class="toc-text">Golang中GC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#go-v1.3%E4%B9%8B%E5%89%8D%E7%9A%84%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4mark-and-sweep"><span class="toc-number">2.</span> <span class="toc-text">Go V1.3之前的标记清除（mark
